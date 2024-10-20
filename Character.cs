@@ -8,6 +8,3 @@ public abstract class Character
     return $"Id: {Id}\nName: {Name}\nDescription: {Description}\n";
   }
 }
-0 commit comments
-Comments
-0
