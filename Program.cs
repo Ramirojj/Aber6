@@ -28,11 +28,17 @@ do
   }
   else if (choice == "2")
   {
-      foreach(var c in marios)
+     Mario mario = new()
     {
-      Console.WriteLine(c.Display());
-    }
+      Id = marios.Count == 0 ? 1 : marios.Max(c => c.Id) + 1
+    };
+    Console.WriteLine("Enter Name:");
+    mario.Name = Console.ReadLine();
+    Console.WriteLine("Enter Description:");
+    mario.Description = Console.ReadLine();
   }
+
+  
   else if (choice == "3")
   {
     // Remove Mario Character
