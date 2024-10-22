@@ -20,13 +20,13 @@ do
   // display choices to user
   Console.WriteLine("1) Display Mario Characters");
   Console.WriteLine("2) Add Mario Character");
-  Console.WriteLine("3) Remove Mario Character");/*
+  Console.WriteLine("3) Remove Mario Character");
   Console.WriteLine("4) Display Mario Donkey Kong Characters");
   Console.WriteLine("5) Add donkey kong Character");
   Console.WriteLine("6) Remove donkey kong Character");
   Console.WriteLine("7) Display street fighter 2 Characters");
   Console.WriteLine("8) Add street fighter 2 Character");
-  Console.WriteLine("9) Remove street fighter 2 Character");*/
+  Console.WriteLine("9) Remove street fighter 2 Character");
   Console.WriteLine("Enter to quit");
   // input selection
   string? choice = Console.ReadLine();
