@@ -31,64 +31,148 @@ do
   // input selection
   string? choice = Console.ReadLine();
   logger.Info("User choice: {Choice}", choice);
-  if (choice == "1")
-  {
-    // Display Mario Characters
-      foreach(var c in marios)
+
+  /*------------------------------------------------------------------------------------*/
+  
+
+switch (choice){
+case "1":
+    foreach(var c in marios)
     {
       Console.WriteLine(c.Display());
     }
-  }
-  else if (choice == "2")
-  {
-     Mario mario = new()
+    break;
+
+    /////////////////////////////////////////////
+    case "2":  
+    Mario mario = new()
     {
       Id = marios.Count == 0 ? 1 : marios.Max(c => c.Id) + 1
     };
-
-    ////////////////////////////////////
-    
-InputCharacter(mario);
-    //mario.Alias = list;
-
-     marios.Add(mario);
+    InputCharacter(mario);          
+    marios.Add(mario);  
     File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
     logger.Info($"Character added: {mario.Name}");
-  }
-
-  
-  else if (choice == "3")
-  {
-    // Remove Mario Character
-
-Console.WriteLine("Enter the Id of the character to remove:");
-    if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+    break;
+///////////////////////////////////////////////
+///
+    case "3":
+    Console.WriteLine("Enter the Id of the character to remove:");
+if (UInt32.TryParse(Console.ReadLine(), out UInt32 marioId))
+{
+    Mario? character = marios.FirstOrDefault(c => c.Id == marioId);
+    if (character == null)
     {
-        ///////////////////////////
-     Mario? character = marios.FirstOrDefault(c => c.Id == Id);
-      if (character == null)
-      {
-        logger.Error($"Character Id {Id} not found");
-      } else {
-
-
-         marios.Remove(character);
-        // serialize list<marioCharacter> into json file
-        File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
-        logger.Info($"Character Id {Id} removed");
-      }
+        logger.Error($"Character Id {marioId} not found");
     } else {
-      logger.Error("Invalid Id");
+        marios.Remove(character);
+        File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
+        logger.Info($"Character Id {marioId} removed");
+    }
+} else {
+    logger.Error($"Invalid Id{marioId} ");
+            
+}
+break;  
+/////////////////////////////////////////
+case "4":
+    foreach(var c in dks)
+    {
+      Console.WriteLine(c.Display());
+    }
+    break; 
+
+
+    ////////////////////////
+
+    case "5":   
+    dk dk = new()
+    {
+      Id = dks.Count == 0 ? 1 : dks.Max(c => c.Id) + 1
+    };
+    InputCharacter(dk);
+    dks.Add(dk);
+    File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
+    logger.Info($"Character added: {dk.Name}");
+    break;
+    ////////////////////////////
+    case "6":
+    Console.WriteLine("Enter the Id of the character to remove:");
+if (UInt32.TryParse(Console.ReadLine(), out UInt32 dkId)){
+
+    dk? character = dks.FirstOrDefault(c => c.Id == dkId);
+    if (character == null)
+    {
+        logger.Error($"Character Id {dkId} not found");
+    } else {
+        dks.Remove(character);
+        File.WriteAllText(dkFileName, JsonSerializer.Serialize(dks));
+        logger.Info($"Character Id {dkId} removed");
+    }
+} else {
+    logger.Error($"Invalid Id{dkId}");
+}
+break;
+//////////////////////////////////////
+case "7": 
+    foreach(var c in sf2s)
+    {
+      Console.WriteLine(c.Display());
+    } 
+    break;
+    case "8":
+    sf2 sf = new()
+    {
+      Id = sf2s.Count == 0 ? 1 : sf2s.Max(c => c.Id) + 1
+    };
+    InputCharacter(sf);
+    sf2s.Add(sf);        
+    File.WriteAllText(sf2FileName, JsonSerializer.Serialize(sf2s));
+    logger.Info($"Character added: {sf.Name}");
+    break;  
+
+    case "9":                 
+    Console.WriteLine("Enter the Id of the character to remove:");
+if (UInt32.TryParse(Console.ReadLine(), out UInt32 sfId)) 
+{                 
+
+    sf2? character = sf2s.FirstOrDefault(c => c.Id == sfId);
+
+    if (character == null)
+    {
+        logger.Error($"Character Id {sfId} not found");
+    } else {
+        sf2s.Remove(character);
+        File.WriteAllText(sf2FileName, JsonSerializer.Serialize(sf2s));
+        logger.Info($"Character Id {sfId} removed");
     }
 
-
-  } else if (string.IsNullOrEmpty(choice)) {
-    break;
-  } else {
+} else {
+    logger.Error("Invalid Id{Id}");
+}     
+break;    
+case "":   
+logger.Info("Program ended"); 
+    break;    
+default:    
     logger.Info("Invalid choice");
-  }
-} while (true);
-logger.Info("Program ended");
+
+    break;
+
+}   
+
+
+
+}
+  while (true);
+
+
+
+
+   
+
+/*-----------------------------------------------------------------------------*/
+//logger.Info("Program ended");
 static void InputCharacter(Character character)
 {
   Type type = character.GetType();
